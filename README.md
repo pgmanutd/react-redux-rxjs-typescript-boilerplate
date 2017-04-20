@@ -1,1 +1,3 @@
-# react-redux-rxjs-typescript-boilerplate
+# React, Redux, RxJS and Typescript Boilerplate
+
+***Coming Soon***
