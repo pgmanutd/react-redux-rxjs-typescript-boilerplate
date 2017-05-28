@@ -1,0 +1,7 @@
+// NOTE: For Webpack Tree Shaking
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "es2015"
+  }
+}

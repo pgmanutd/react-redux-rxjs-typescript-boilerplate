@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "DOM",
+      "ES6",
+      "DOM.Iterable",
+      "ScriptHost"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "jsx": "react",
+    "suppressImplicitAnyIndexErrors": true,
+    "noFallthroughCasesInSwitch": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "allowJs": true,
+    "checkJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@webui/*": ["src/*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "types": [
+      "node",
+      "mocha"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "typings/**/*"
+  ]
+}

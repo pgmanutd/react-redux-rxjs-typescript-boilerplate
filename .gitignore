@@ -1,0 +1,27 @@
+# log files
+logs
+*.log
+*.log.*
+
+# packages
+node_modules/*
+
+#ide files
+.idea
+*.idea*
+*.iml
+
+#sublime
+*.sublime-*
+
+#VSCode metadata
+.vscode
+
+OSX BS
+*.DS_Store*
+
+# Client built files
+dist
+dest
+coverage
+.nyc_output

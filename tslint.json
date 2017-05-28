@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules"
+  ],
+  "rules": {
+    "arrow-parens": [false],
+    "quotemark": [true, "single"],
+    "semicolon": [true, "always"],
+    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
+    "member-access": [false],
+    "object-literal-sort-keys": [false],
+    "max-line-length": [false],
+    "no-var-requires": [false],
+    "interface-name": [false],
+    "quotemark": [true, "single", "jsx-double"],
+    "ter-indent": [true, 2, { "SwitchCase": 1 }]
+  }
+}

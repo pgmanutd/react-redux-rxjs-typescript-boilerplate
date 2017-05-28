@@ -1,0 +1,12 @@
+--compilers ts-node/register
+--require source-map-support/register
+--require ignore-styles
+--require tsconfig-paths/register
+--require src/common/testing-utils/setup.ts
+--reporter list
+--full-trace
+--bail
+--recursive
+--watch-extensions tsx,ts
+src/**/*.spec.tsx
+src/**/*.spec.ts

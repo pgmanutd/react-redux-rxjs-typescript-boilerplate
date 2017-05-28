@@ -1,0 +1,17 @@
+/*********** Global Imports ***********/
+
+@import '@webui/common/styles';
+
+/******************************************/
+
+.app {
+  font-family: var(--font-text);
+}
+
+:global(.Day) {
+  background-color: var(--color-theme-day);
+}
+
+:global(.Night) {
+  background-color: var(--color-theme-night);
+}
