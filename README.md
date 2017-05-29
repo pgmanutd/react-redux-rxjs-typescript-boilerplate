@@ -1,4 +1,4 @@
-# React Redux RxJS Typescript Boilerplate
+# React Redux RxJS Typescript Boilerplate with React Hot Loader
 
 ## Getting started
 
