@@ -7,7 +7,7 @@ import {
   Subscription
 } from '@webui/utils/rxjs';
 
-export type RxProps<T> = {
+export type ToObservableT<T> = {
   [K in keyof T]: T[K] | Observable<T[K]>;
 };
 
@@ -40,13 +40,13 @@ export function DefaultComponent<P>(props: P): JSX.Element {
 
 export default function Rx<P>(
   Component: ReactComponentT<P> = DefaultComponent
-): React.ComponentClass<RxProps<P>> {
+): React.ComponentClass<ToObservableT<P>> {
 
-  return class ReactiveComponent extends React.Component<RxProps<P>, {}> {
+  return class ReactiveComponent extends React.Component<ToObservableT<P>, {}> {
     static displayName: string = getRxDisplayName(Component);
     subscriptions: Subscription[];
 
-    constructor(props: RxProps<P>) {
+    constructor(props: ToObservableT<P>) {
       super(props);
 
       this.state = {};
@@ -57,7 +57,7 @@ export default function Rx<P>(
       this.subscribe(this.props);
     }
 
-    componentWillReceiveProps(props: RxProps<P>) {
+    componentWillReceiveProps(props: ToObservableT<P>) {
       this.subscribe(props);
     }
 
@@ -65,7 +65,7 @@ export default function Rx<P>(
       this.unsubscribe(this.subscriptions);
     }
 
-    subscribe(props: RxProps<P>) {
+    subscribe(props: ToObservableT<P>) {
       const oldSubscriptions = this.subscriptions;
 
       const [propPairs$, propPairs] = fp.partition(

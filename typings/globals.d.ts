@@ -4,7 +4,7 @@ interface KeyValuePair {
   readonly[name: string]: any;
 }
 
-// NOTE: Replace System.import by import() once this proposal is accepted:
+// TODO: Replace System.import by import() once this proposal is accepted:
 // https://github.com/tc39/proposal-dynamic-import
 // Tracked here: https://github.com/Microsoft/TypeScript/issues/12364
 interface System {

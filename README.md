@@ -2,7 +2,7 @@
 
 ## Getting started
 
-This project uses [React](https://facebook.github.io/react/) based components and component state is managed by [Redux](http://redux.js.org/). I use Reactive Component (created using [React](https://facebook.github.io/react/) and [RxJS](http://reactivex.io/rxjs/)) for updating the DOM whenever [Redux](http://redux.js.org/) state changes. Your project has to provide a store from [react-redux](https://github.com/reactjs/react-redux).
+This project uses [React](https://facebook.github.io/react/) based components and component state is managed by [Redux](http://redux.js.org/). Reactive Component (created using [React](https://facebook.github.io/react/) and [RxJS](http://reactivex.io/rxjs/)) is used for updating the DOM whenever [Redux](http://redux.js.org/) state changes. Your project has to provide a store from [react-redux](https://github.com/reactjs/react-redux).
 
 ### Technology Stack
 * ```react```
@@ -89,7 +89,8 @@ yarn release
 - [ ] Implement [Bundle Loader](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
 - [ ] Configure redux with the help of rxjs for reactive components
 - [ ] Remove unnecessary importing of lodash and rxjs (import what is required; will reduce bundle size)
-- [ ] Identify area of improvement, refactoring, add more test cases
+- [ ] Add react-helmet for SEO (Search Engine Optimization)
+- [ ] Identify areas of improvement, refactoring and add more test cases
 
 ## License
 
