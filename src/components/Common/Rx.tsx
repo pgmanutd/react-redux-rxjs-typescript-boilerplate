@@ -7,6 +7,8 @@ import {
   Subscription
 } from '@webui/utils/rxjs';
 
+import purify from './purify';
+
 export type ToObservableT<T> = {
   [K in keyof T]: T[K] | Observable<T[K]>;
 };
@@ -39,10 +41,10 @@ export function DefaultComponent<P>(props: P): JSX.Element {
 }
 
 export default function Rx<P>(
-  Component: ReactComponentT<P> = DefaultComponent
+  Component: ReactComponentT<P> = purify(DefaultComponent)
 ): React.ComponentClass<ToObservableT<P>> {
 
-  return class ReactiveComponent extends React.Component<ToObservableT<P>, {}> {
+  return class ReactiveComponent extends React.PureComponent<ToObservableT<P>, {}> {
     static displayName: string = getRxDisplayName(Component);
     subscriptions: Subscription[];
 
