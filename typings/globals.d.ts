@@ -28,5 +28,6 @@ declare namespace NodeJS {
     System: System;
     __DEV__: typeof __DEV__;
     __LANGUAGE__: typeof __LANGUAGE__;
+    __FP_DEBUGGER__: typeof __FP_DEBUGGER__;
   }
 }

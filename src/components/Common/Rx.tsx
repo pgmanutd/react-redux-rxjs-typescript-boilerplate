@@ -1,3 +1,4 @@
+import * as clogy from 'clogy';
 import * as fp from 'lodash/fp';
 import * as React from 'react';
 
@@ -83,6 +84,9 @@ export default function Rx<P>(
         return value.subscribe({
           next: (val: any) => {
             this.setStateFromProps(name, val);
+          },
+          error: (e: Error) => {
+            clogy.warn(`Error from Observable Prop "${name}"`, e);
           }
         });
       });

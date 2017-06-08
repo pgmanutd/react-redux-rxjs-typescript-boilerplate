@@ -42,7 +42,7 @@ export const getLocaleFile$: GetLocaleFile$T = (path: string) => {
         System.import<KeyValuePair>(`./${currentLocale}/${path}.i18n.json`)
       );
     } catch (e) {
-      clogy.error(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
+      clogy.warn(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
     }
   }
 

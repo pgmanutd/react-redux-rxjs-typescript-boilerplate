@@ -1,5 +1,6 @@
 import * as clogy from 'clogy';
 import * as fp from 'lodash/fp';
+import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
 import {
@@ -33,6 +34,9 @@ export const BundleComponent: ReactComponentT<{}> = (props) => {
   // NOTE: Should be null. Some problem with React Type definitions.
   // https://github.com/facebook/react/issues/5355
   return <noscript />;
+};
+BundleComponent.propTypes = {
+  children: PropTypes.func
 };
 
 export const PurifiedBundleRxComponent = fp.flowRight(Rx, purify)(BundleComponent);
