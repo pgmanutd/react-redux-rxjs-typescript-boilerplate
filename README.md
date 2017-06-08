@@ -86,7 +86,8 @@ yarn release
 
 ## TODO
 
-- [ ] Implement [Bundle Loader](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+- [x] Implement [Bundle Loader](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/code-splitting.md)
+  - Implemented using BundleRx (A Rx based Bundle Loader)
 - [ ] Configure redux with the help of rxjs for reactive components
 - [ ] Remove unnecessary importing of lodash and rxjs (import what is required; will reduce bundle size)
 - [ ] Add react-helmet for SEO (Search Engine Optimization)
