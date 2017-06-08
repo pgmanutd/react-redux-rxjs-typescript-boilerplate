@@ -1,5 +1,6 @@
 import * as CompressionPlugin from 'compression-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import * as fp from 'lodash/fp';
 import * as OfflinePlugin from 'offline-plugin';
 import * as path from 'path';
 import * as webpack from 'webpack';
@@ -45,7 +46,8 @@ const webpackProdConfig: webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(prod),
       '__DEV__': false,
-      '__LANGUAGE__': JSON.stringify(language)
+      '__LANGUAGE__': JSON.stringify(language),
+      '__FP_DEBUGGER__': fp.identity
     }),
     new CompressionPlugin({
       asset: '[path].gz[query]',

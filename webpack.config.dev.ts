@@ -40,7 +40,13 @@ const webpackDevConfig: webpack.Configuration = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(dev),
       '__DEV__': true,
-      '__LANGUAGE__': JSON.stringify('en')
+      '__LANGUAGE__': JSON.stringify('en'),
+      '__FP_DEBUGGER__': <T>(arg: T): T => {
+        // tslint:disable-next-line:no-console
+        console.log(arg);
+
+        return arg;
+      }
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),

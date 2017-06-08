@@ -18,6 +18,7 @@ interface NodeModule {
 
 declare const __DEV__: boolean;
 declare const __LANGUAGE__: string;
+declare const __FP_DEBUGGER__: <T>(a: T) => T;
 
 declare namespace NodeJS {
   interface Global {

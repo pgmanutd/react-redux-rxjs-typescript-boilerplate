@@ -1,4 +1,9 @@
 export {
+  default as BundleRx
+} from './BundleRx';
+export * from './BundleRx';
+
+export {
   default as purify
 }
 from './purify';

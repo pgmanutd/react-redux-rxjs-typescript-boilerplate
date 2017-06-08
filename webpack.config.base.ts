@@ -101,13 +101,18 @@ const webpackBaseConfig: webpack.Configuration = {
       name: ['vendor', 'manifest'],
       minChunks: Infinity
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: [MODULE_NAME],
+      children: true,
+      async: true
+    }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
       preload: /\.js$/,
       prefetch: /\.js$/
     }),
     new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 50000
+      minChunkSize: 100
     }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'public/imgs/favicon.jpg'),
