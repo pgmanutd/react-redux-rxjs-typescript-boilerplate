@@ -23,7 +23,9 @@ declare const __FP_DEBUGGER__: <T>(a: T) => T;
 declare namespace NodeJS {
   interface Global {
     document: any;
-    window: any;
+    window: {
+      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: <T>(a: T) => T;
+    };
     navigator: any;
     System: System;
     __DEV__: typeof __DEV__;
