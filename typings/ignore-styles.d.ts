@@ -6,7 +6,7 @@ declare module 'ignore-styles' {
     (extensions: DEFAULT_EXTENSIONS_T, handler: NoOpT): void;
     DEFAULT_EXTENSIONS: DEFAULT_EXTENSIONS_T;
     oldHandlers: {
-      [ext: string]: NoOpT
+      [ext: string]: NoOpT,
     };
     noOp: NoOpT;
     restore: NoOpT;

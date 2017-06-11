@@ -6,7 +6,7 @@ export type MultiProjectionT = <T, R>(...values: T[]) => R;
 
 const computeObservable = <T, R>(
     projection: SingleProjectionT | MultiProjectionT,
-    observables: Array<Observable<T>>
+    observables: Array<Observable<T>>,
   ): Observable<R> => {
   switch (observables.length) {
     case 1:

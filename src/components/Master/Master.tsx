@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   Link,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 
 import { BundleRx } from '@webui/components/Common';
@@ -19,7 +19,7 @@ const {
   navbarNav,
   navItem,
   active,
-  container
+  container,
 } = bootstrap;
 
 const getPromisifiedHomeLayoutBundle = () => System.import<any>('@webui/layouts/Home');

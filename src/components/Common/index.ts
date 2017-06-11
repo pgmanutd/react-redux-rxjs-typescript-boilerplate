@@ -1,20 +1,20 @@
 export {
-  default as BundleRx
+  default as BundleRx,
 } from './BundleRx';
 export * from './BundleRx';
 
 export {
-  default as purify
+  default as purify,
 }
 from './purify';
 
 export {
-  default as rename
+  default as rename,
 }
 from './rename';
 
 export {
-  default as Rx
+  default as Rx,
 }
 from './Rx';
 

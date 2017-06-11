@@ -14,11 +14,11 @@ const bodyClassList: DOMTokenList = document.body.classList;
  */
 export default class Themer extends React.PureComponent<ThemerProps, {}> {
   static propTypes = {
-    theme: PropTypes.string
+    theme: PropTypes.string,
   };
 
   static defaultProps: Partial<ThemerProps> = {
-    theme: DEFAULT_THEME
+    theme: DEFAULT_THEME,
   };
 
   componentDidMount() {

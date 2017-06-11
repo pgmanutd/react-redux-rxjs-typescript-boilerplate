@@ -1,4 +1,4 @@
 export {
-  default
+  default,
 }
 from './Master';

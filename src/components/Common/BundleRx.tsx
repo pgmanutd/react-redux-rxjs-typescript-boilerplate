@@ -7,7 +7,7 @@ import {
   computeObservable,
   Observable,
   observableFromPromise,
-  observableOf
+  observableOf,
 } from '@webui/utils/rxjs';
 
 import purify from './purify';
@@ -36,7 +36,7 @@ export const BundleComponent: ReactComponentT<{}> = (props) => {
   return <noscript />;
 };
 BundleComponent.propTypes = {
-  children: PropTypes.func
+  children: PropTypes.func,
 };
 
 export const PurifiedBundleRxComponent = fp.flowRight(Rx, purify)(BundleComponent);
@@ -44,8 +44,8 @@ export const PurifiedBundleRxComponent = fp.flowRight(Rx, purify)(BundleComponen
 export const getModuleFromBundle$ = <T1, T2>(bundle$: Observable<T1>) =>
   computeObservable<T1, T2>(
     (module: T1 & KeyValuePair) => fp.pathOr(module, 'default', module), [
-      bundle$
-    ]
+      bundle$,
+    ],
   );
 
 export type PromiseThunkT = <T>() => Promise<T>;

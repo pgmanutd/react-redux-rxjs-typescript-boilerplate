@@ -10,7 +10,7 @@ const render: RenderT = (Component) => {
     <AppContainer>
       <Component />
     </AppContainer>,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 };
 

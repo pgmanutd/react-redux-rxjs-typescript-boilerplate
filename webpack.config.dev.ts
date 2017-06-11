@@ -5,7 +5,7 @@ import * as pkg from './package.json';
 import webpackBaseConfig, {
   getCssConfig,
   getHTMLPlugin,
-  getTSConfig
+  getTSConfig,
 } from './webpack.config.base';
 
 const {
@@ -13,27 +13,27 @@ const {
   config: {
     dirs: DIRS,
     env: {
-      dev
+      dev,
     },
     host,
     port,
     api: {
       host: apiHost,
-      port: apiPort
-    }
-  }
+      port: apiPort,
+    },
+  },
 }: KeyValuePair = pkg;
 
 const webpackDevConfig: webpack.Configuration = {
   entry: {
     [MODULE_NAME]: [
       'react-hot-loader/patch',
-      path.resolve(__dirname, `${DIRS.src}/index`)
-    ]
+      path.resolve(__dirname, `${DIRS.src}/index`),
+    ],
   },
   output: {
     filename: '[name].js',
-    chunkFilename: '[id].chunk.js'
+    chunkFilename: '[id].chunk.js',
   },
   devtool: 'cheap-module-eval-source-map',
   plugins: [
@@ -46,30 +46,30 @@ const webpackDevConfig: webpack.Configuration = {
         console.log(arg);
 
         return arg;
-      }
+      },
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    ...getHTMLPlugin()
+    ...getHTMLPlugin(),
   ],
   module: {
     rules: [
       getTSConfig([{
-        loader: 'react-hot-loader/webpack'
+        loader: 'react-hot-loader/webpack',
       }]),
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader'
+            loader: 'style-loader',
           },
           ...getCssConfig({
             localIdentName: '[name]__[local]___[hash:base64:5]',
-            sourceMap: true
-          })
-        ]
-      }
-    ]
+            sourceMap: true,
+          }),
+        ],
+      },
+    ],
   },
   devServer: {
     hot: true,
@@ -84,10 +84,10 @@ const webpackDevConfig: webpack.Configuration = {
     proxy: {
       '/service': {
         target: `http://${apiHost}:${apiPort}`,
-        pathRewrite: { '^/service': '' }
-      }
-    }
-  }
+        pathRewrite: { '^/service': '' },
+      },
+    },
+  },
 };
 
 export default webpackMerge(webpackBaseConfig, webpackDevConfig);

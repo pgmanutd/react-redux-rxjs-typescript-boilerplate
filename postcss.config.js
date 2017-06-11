@@ -34,6 +34,6 @@ module.exports = {
     },
     'postcss-cssnext': {
       browsers: ['last 2 versions', '> 5%'],
-    }
-  }
+    },
+  },
 };

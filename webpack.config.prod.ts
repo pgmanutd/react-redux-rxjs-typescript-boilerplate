@@ -9,7 +9,7 @@ import * as pkg from './package.json';
 import webpackBaseConfig, {
   getCssConfig,
   getHTMLPlugin,
-  getTSConfig
+  getTSConfig,
 } from './webpack.config.base';
 
 const {
@@ -17,50 +17,50 @@ const {
   config: {
     dirs: DIRS,
     env: {
-      prod
+      prod,
     },
-    language
-  }
+    language,
+  },
 }: KeyValuePair = pkg;
 
 const webpackProdConfig: webpack.Configuration = {
   entry: {
     [MODULE_NAME]: [
-      path.resolve(__dirname, `${DIRS.src}/index`)
-    ]
+      path.resolve(__dirname, `${DIRS.src}/index`),
+    ],
   },
   output: {
     filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[id].[chunkhash:8].chunk.js'
+    chunkFilename: '[id].[chunkhash:8].chunk.js',
   },
   devtool: 'source-map',
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true
+      sourceMap: true,
     }),
     new ExtractTextPlugin({
       filename: '[name].[contenthash:8].css',
-      allChunks: true
+      allChunks: true,
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(prod),
       '__DEV__': false,
       '__LANGUAGE__': JSON.stringify(language),
-      '__FP_DEBUGGER__': fp.identity
+      '__FP_DEBUGGER__': fp.identity,
     }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',
       test: /\.(js|css|html)$/,
       threshold: 10240,
-      minRatio: 0.8
+      minRatio: 0.8,
     }),
     ...getHTMLPlugin({
       minify: {
         removeComments: true,
-        collapseWhitespace: true
-      }
+        collapseWhitespace: true,
+      },
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     // TODO: Ambient Declaration for HashedModuleIdsPlugin not present
@@ -72,29 +72,29 @@ const webpackProdConfig: webpack.Configuration = {
           `${MODULE_NAME}.*.css`,
           'vendor.*.js',
           `${MODULE_NAME}.*.js`,
-          '*.chunk.js'
+          '*.chunk.js',
         ],
         additional: [
-          ':externals:'
+          ':externals:',
         ],
         optional: [
-          ':rest:'
-        ]
+          ':rest:',
+        ],
       },
       externals: [
-        '/'
+        '/',
       ],
       ServiceWorker: {
-        navigateFallbackURL: '/'
+        navigateFallbackURL: '/',
       },
       AppCache: {
         FALLBACK: {
-          '/': '/offline-page.html'
-        }
+          '/': '/offline-page.html',
+        },
       },
       safeToUseOptionalCaches: true,
-      updateStrategy: 'changed'
-    })
+      updateStrategy: 'changed',
+    }),
   ],
   module: {
     rules: [
@@ -105,12 +105,12 @@ const webpackProdConfig: webpack.Configuration = {
           fallback: 'style-loader',
           use: getCssConfig({
             localIdentName: '[hash:base64:5]',
-            minimize: true
-          })
-        })
-      }
-    ]
-  }
+            minimize: true,
+          }),
+        }),
+      },
+    ],
+  },
 };
 
 export default webpackMerge(webpackBaseConfig, webpackProdConfig);

@@ -18,7 +18,7 @@ const {
   lead,
   btn,
   btnLg,
-  btnPrimary
+  btnPrimary,
 } = bootstrap;
 
 const FourOFourLayout: React.StatelessComponent<{}> = () => (

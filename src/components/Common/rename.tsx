@@ -2,7 +2,7 @@ import { ReactComponentT } from './Rx';
 
 const rename = <P, C extends ReactComponentT<P>>(
   name: string,
-  component: C
+  component: C,
 ): C => {
   component.displayName = name;
 

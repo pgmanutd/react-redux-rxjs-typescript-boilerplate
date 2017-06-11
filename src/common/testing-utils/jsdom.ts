@@ -6,7 +6,7 @@ import * as fp from 'lodash/fp';
 global.document = jsdom('');
 global.window = document.defaultView;
 global.navigator = {
-  userAgent: 'node.js'
+  userAgent: 'node.js',
 };
 
 function copyProps(src: Window, target: NodeJS.Global) {
@@ -14,7 +14,7 @@ function copyProps(src: Window, target: NodeJS.Global) {
     .filter((prop) => fp.isUndefined(target[prop]))
     .reduce((accum, prop) => ({
       ...accum,
-      [prop]: Object.getOwnPropertyDescriptor(src, prop)
+      [prop]: Object.getOwnPropertyDescriptor(src, prop),
     }), {});
 
   Object.defineProperties(target, props);

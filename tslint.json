@@ -7,7 +7,6 @@
     "arrow-parens": [false],
     "quotemark": [true, "single"],
     "semicolon": [true, "always"],
-    "trailing-comma": [true, { "multiline": "never", "singleline": "never" }],
     "member-access": [false],
     "object-literal-sort-keys": [false],
     "max-line-length": [false],

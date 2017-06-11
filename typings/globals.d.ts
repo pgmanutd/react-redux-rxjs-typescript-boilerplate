@@ -31,3 +31,7 @@ declare namespace NodeJS {
     __FP_DEBUGGER__: typeof __FP_DEBUGGER__;
   }
 }
+
+interface Window {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: <T>(a: T) => T;
+}

@@ -7,7 +7,7 @@ const getObservableValue = <T, FallbackValue>(input: Observable<T>, fallback: Fa
   input.subscribe({
     next(val: any) {
       value = val;
-    }
+    },
   }).unsubscribe();
 
   if (fp.isUndefined(value)) {

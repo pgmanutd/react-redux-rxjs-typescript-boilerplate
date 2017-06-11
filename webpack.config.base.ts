@@ -10,8 +10,8 @@ const {
   description,
   config: {
     dirs: DIRS,
-    productionURL
-  }
+    productionURL,
+  },
 }: KeyValuePair = pkg;
 
 type CSSRuleConfigT = ({ localIdentName, minimize, sourceMap }: KeyValuePair) => webpack.Loader[];
@@ -23,13 +23,13 @@ export const getCssConfig: CSSRuleConfigT = ({ localIdentName, minimize = false,
     camelCase: true,
     sourceMap,
     localIdentName,
-    minimize
-  }
+    minimize,
+  },
 }, {
   loader: 'postcss-loader',
   options: {
-    sourceMap
-  }
+    sourceMap,
+  },
 }]);
 
 type TSRuleConfigT = (tsRules?: webpack.Loader[]) => webpack.NewUseRule;
@@ -39,11 +39,11 @@ export const getTSConfig: TSRuleConfigT = (tsRules = []) => ({
     ...tsRules, {
       loader: 'awesome-typescript-loader',
       options: {
-        configFileName: 'tsconfig.es2015.json'
-      }
-    }
+        configFileName: 'tsconfig.es2015.json',
+      },
+    },
   ],
-  exclude: /node_modules/
+  exclude: /node_modules/,
 });
 
 type HTMLPluginT = (options?: KeyValuePair) => HtmlWebpackPlugin[];
@@ -54,65 +54,65 @@ export const getHTMLPlugin: HTMLPluginT = (options = {}) => ([
     template: 'public/views/index.ejs',
     inject: true,
     chunksSortMode: 'dependency',
-    ...options
+    ...options,
   }),
   new HtmlWebpackPlugin({
     productionURL,
     filename: 'javascript-required.html',
     template: 'public/views/javascript-required.ejs',
     inject: false,
-    ...options
+    ...options,
   }),
   new HtmlWebpackPlugin({
     productionURL,
     filename: 'offline-page.html',
     template: 'public/views/offline-page.ejs',
     inject: false,
-    ...options
+    ...options,
   }),
   new HtmlWebpackPlugin({
     productionURL,
     filename: 'upgrade-browser.html',
     template: 'public/views/upgrade-browser.ejs',
     inject: false,
-    ...options
-  })
+    ...options,
+  }),
 ]);
 
 const webpackBaseConfig: webpack.Configuration = {
   resolve: {
     alias: {
-      '@webui': path.resolve(__dirname, DIRS.src)
+      '@webui': path.resolve(__dirname, DIRS.src),
     },
-    extensions: ['.js', '.ts', '.tsx', '.json', '.css']
+    extensions: ['.js', '.ts', '.tsx', '.json', '.css'],
   },
   entry: {
-    vendor: path.resolve(__dirname, `${DIRS.src}/common/vendor`)
+    vendor: path.resolve(__dirname, `${DIRS.src}/common/vendor`),
   },
   output: {
     path: path.resolve(__dirname, DIRS.dist),
-    publicPath: '/'
+    publicPath: '/',
   },
   plugins: [
     new webpack.BannerPlugin(
-      `${pkg.name} - v${pkg.version} * ${pkg.homepage} * (c) ${new Date().getFullYear()} ${pkg.author.name} * licensed ${pkg.license}`
+      `${pkg.name} - v${pkg.version} * ${pkg.homepage} * (c) ${new Date().getFullYear()} ${pkg.author.name} * licensed ${pkg.license}`,
     ),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],
-      minChunks: Infinity
+      minChunks: Infinity,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: [MODULE_NAME],
       children: true,
-      async: true
+      async: true,
     }),
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: 'defer',
       preload: /\.js$/,
-      prefetch: /\.js$/
+      prefetch: /\.js$/,
     }),
     new webpack.optimize.MinChunkSizePlugin({
-      minChunkSize: 100
+      minChunkSize: 100,
     }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'public/imgs/favicon.jpg'),
@@ -133,44 +133,44 @@ const webpackBaseConfig: webpack.Configuration = {
         opengraph: false,
         twitter: false,
         yandex: false,
-        windows: false
-      }
-    })
+        windows: false,
+      },
+    }),
   ],
   module: {
     rules: [{
       enforce: 'pre',
       test: /\.js$/,
-      loader: 'source-map-loader'
+      loader: 'source-map-loader',
     }, {
       enforce: 'pre',
       test: /\.tsx?$/,
-      loader: 'source-map-loader'
+      loader: 'source-map-loader',
     }, {
       test: /\.html$/,
-      loader: 'html-loader'
+      loader: 'html-loader',
     }, {
       test: /\.(woff|woff2|ttf|eot)$/,
       use: [{
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'fonts/[hash:8].[ext]'
-        }
-      }]
+          name: 'fonts/[hash:8].[ext]',
+        },
+      }],
     }, {
       test: /\.(png|jpe?g|gif|ico|svg)$/,
       use: [{
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'imgs/[hash:8].[ext]'
-        }
+          name: 'imgs/[hash:8].[ext]',
+        },
       }, {
-        loader: 'img-loader'
-      }]
-    }]
-  }
+        loader: 'img-loader',
+      }],
+    }],
+  },
 };
 
 export default webpackBaseConfig;

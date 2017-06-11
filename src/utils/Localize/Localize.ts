@@ -5,7 +5,7 @@ import {
   computeObservable,
   Observable,
   observableFromPromise,
-  observableOf
+  observableOf,
 } from '@webui/utils/rxjs';
 
 // TODO: Replace with redux state
@@ -15,7 +15,7 @@ export interface LocaleSettings {
 }
 const localeSettings: LocaleSettings = {
   defaultLocale: 'en',
-  currentLocale: __LANGUAGE__
+  currentLocale: __LANGUAGE__,
 };
 
 type checkIfLocaleIsStringT = (locale: string) => never | void;
@@ -39,10 +39,10 @@ export const getLocaleFile$: GetLocaleFile$T = (path: string) => {
   if (defaultLocale !== currentLocale) {
     try {
       return observableFromPromise<KeyValuePair>(
-        System.import<KeyValuePair>(`./${currentLocale}/${path}.i18n.json`)
+        System.import<KeyValuePair>(`./${currentLocale}/${path}.i18n.json`),
       );
     } catch (e) {
-      clogy.warn(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
+      clogy.error(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
     }
   }
 
@@ -52,12 +52,12 @@ export const getLocaleFile$: GetLocaleFile$T = (path: string) => {
 type GetValueFromLocaleFileT = <T, K extends keyof T, U>(
   localeFile: T,
   key: K,
-  fallback: U
+  fallback: U,
 ) => T[K] | U;
 export const getValueFromLocaleFile: GetValueFromLocaleFileT = (
   localeFile: KeyValuePair,
   key: keyof KeyValuePair,
-  fallback: string
+  fallback: string,
 ) => fp.pathOr(fallback, key, localeFile);
 
 type LocalizeT = (path: string) => (key: string, text: string) => Observable<string>;
@@ -69,8 +69,8 @@ const Localize: LocalizeT = (path: string) => {
       getValueFromLocaleFile, [
         localeFile$,
         observableOf(key),
-        observableOf(text)
-      ]
+        observableOf(text),
+      ],
     );
 };
 

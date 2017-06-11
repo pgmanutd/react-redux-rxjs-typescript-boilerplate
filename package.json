@@ -58,6 +58,7 @@
     "version:minor": "npm version minor",
     "version:major": "npm version major",
     "help": "npm run",
+    "deploy": "./scripts/deploy.sh",
     "release": "./scripts/release.sh"
   },
   "nyc": {

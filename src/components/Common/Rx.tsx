@@ -5,7 +5,7 @@ import * as React from 'react';
 import {
   isObservable,
   Observable,
-  Subscription
+  Subscription,
 } from '@webui/utils/rxjs';
 
 import purify from './purify';
@@ -24,16 +24,16 @@ export function getRxDisplayName<P>(tag: string | NoOpT | ReactComponentT<P>): s
   return fp.cond([
     [
       fp.isString,
-      fp.constant(`${prefix}(${tag})`)
+      fp.constant(`${prefix}(${tag})`),
     ],
     [
       fp.isFunction,
-      fp.constant(`${prefix}(${(tag as NoOpT).name})`)
+      fp.constant(`${prefix}(${(tag as NoOpT).name})`),
     ],
     [
       fp.T,
-      fp.constant(prefix)
-    ]
+      fp.constant(prefix),
+    ],
   ])(tag);
 }
 
@@ -42,7 +42,7 @@ export function DefaultComponent<P>(props: P): JSX.Element {
 }
 
 export default function Rx<P>(
-  Component: ReactComponentT<P> = purify(DefaultComponent)
+  Component: ReactComponentT<P> = purify(DefaultComponent),
 ): React.ComponentClass<ToObservableT<P>> {
 
   return class ReactiveComponent extends React.PureComponent<ToObservableT<P>, {}> {
@@ -73,7 +73,7 @@ export default function Rx<P>(
 
       const [propPairs$, propPairs] = fp.partition(
         ([, value]) => isObservable(value),
-        fp.toPairs(props)
+        fp.toPairs(props),
       );
 
       propPairs.forEach(([name, value]) => {
@@ -86,8 +86,8 @@ export default function Rx<P>(
             this.setStateFromProps(name, val);
           },
           error: (e: Error) => {
-            clogy.warn(`Error from Observable Prop "${name}"`, e);
-          }
+            clogy.error(`Error from Observable Prop "${name}"`, e);
+          },
         });
       });
 
@@ -97,7 +97,7 @@ export default function Rx<P>(
     setStateFromProps(name: string, value: any) {
       if (fp.negate(fp.isEqual)(value, this.state[name])) {
         this.setState({
-          [name]: value
+          [name]: value,
         });
       }
     }

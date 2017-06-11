@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom';
 
 import * as styles from './app.css';
