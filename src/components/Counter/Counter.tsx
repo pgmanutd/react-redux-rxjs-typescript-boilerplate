@@ -1,95 +1,97 @@
-// import * as fp from 'lodash/fp';
-// import * as PropTypes from 'prop-types';
-// import * as React from 'react';
+import * as fp from 'lodash/fp';
+import * as PropTypes from 'prop-types';
+import * as React from 'react';
 
-// import { NoOpT } from '@webui/components/Common';
+import { NoOpT } from '@webui/components/Common';
 
-// export interface CounterProps {
-//   readonly min?: number;
-//   readonly max?: number;
-//   readonly timeout?: number;
-//   readonly onStart?: NoOpT;
-//   readonly onStop?: NoOpT;
-// }
+export interface CounterProps {
+  readonly min?: number;
+  readonly max?: number;
+  readonly timeout?: number;
+  readonly onStart?: NoOpT;
+  readonly onStop?: NoOpT;
+}
 
-// export interface CounterState {
-//   value: number;
-// }
+export interface CounterState {
+  value: number;
+}
 
-// const DEFAULT_PROPS = {
-//   min: 0,
-//   max: 100,
-//   timeout: 1000,
-//   onStart: fp.noop,
-//   onStop: fp.noop
-// };
+const defaultProps = {
+  min: 0,
+  max: 100,
+  timeout: 1000,
+  onStart: fp.noop,
+  onStop: fp.noop,
+};
 
-// let intervalID: NodeJS.Timer;
+export default class Counter extends React.PureComponent<CounterProps, CounterState> {
+  static propTypes = {
+    min: PropTypes.number,
+    max: PropTypes.number,
+    timeout: PropTypes.number,
+    onStart: PropTypes.func,
+    onStop: PropTypes.func,
+  };
 
-// export default class Counter extends React.PureComponent<CounterProps, CounterState> {
-//   static propTypes = {
-//     min: PropTypes.number,
-//     max: PropTypes.number,
-//     timeout: PropTypes.number,
-//     onStart: PropTypes.func,
-//     onStop: PropTypes.func
-//   };
+  static defaultProps: Partial<CounterProps> = defaultProps;
 
-//   static defaultProps: Partial<CounterProps> = DEFAULT_PROPS;
+  intervalID: NodeJS.Timer;
 
-//   constructor(args: CounterProps) {
-//     super(args);
+  constructor(args: CounterProps) {
+    super(args);
 
-//     this.state = {
-//       value: this.props.min || DEFAULT_PROPS.min
-//     };
-//   }
+    this.state = {
+      value: this.props.min || defaultProps.min,
+    };
+  }
 
-//   componentDidMount() {
-//     this.startTimer();
-//   }
+  componentDidMount() {
+    this.startTimer();
+  }
 
-//   componentDidUpdate() {
-//     this.stopTimer();
-//     this.startTimer();
-//   }
+  componentDidUpdate() {
+    this.stopTimer();
+    this.startTimer();
+  }
 
-//   startTimer() {
-//     const {
-//       timeout: defaultTimeout,
-//       onStart: defaultOnStart
-//     } = DEFAULT_PROPS;
+  componentWillUnmount() {
+    this.stopTimer();
+  }
 
-//     const {
-//       timeout = defaultTimeout,
-//       onStart = defaultOnStart
-//     } = this.props;
+  startTimer() {
+    const {
+      timeout: defaultTimeout,
+      onStart: defaultOnStart,
+    } = defaultProps;
 
-//     intervalID = setInterval(() =>
-//       this.setState(
-//         ({ value }) => ({
-//           value: value + 1
-//         })
-//       ), timeout);
+    const {
+      timeout = defaultTimeout,
+      onStart = defaultOnStart,
+    } = this.props;
 
-//     onStart();
-//   }
+    this.intervalID = setInterval(() =>
+      this.setState(
+        ({ value }) => ({
+          value: value + 1,
+        }),
+      ), timeout);
 
-//   stopTimer() {
-//     if (intervalID) {
-//       clearInterval(intervalID);
+    onStart();
+  }
 
-//       const { onStop = DEFAULT_PROPS.onStop } = this.props;
+  stopTimer() {
+    clearInterval(this.intervalID);
 
-//       onStop();
-//     }
-//   }
+    const { onStop = defaultProps.onStop } = this.props;
 
-//   render() {
-//     return (
-//       <div data-testid="Counter">
-//         {this.state.value}
-//       </div>
-//     );
-//   }
-// }
+    onStop();
+  }
+
+  render() {
+    return (
+      <div data-testid="Counter">
+        {this.state.value}
+      </div>
+    );
+  }
+}

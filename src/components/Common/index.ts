@@ -1,6 +1,7 @@
 export {
   default as BundleRx,
-} from './BundleRx';
+}
+from './BundleRx';
 export * from './BundleRx';
 
 export {
