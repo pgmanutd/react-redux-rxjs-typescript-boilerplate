@@ -19,13 +19,10 @@ interface NodeModule {
 declare const __DEV__: boolean;
 declare const __LANGUAGE__: string;
 declare const __FP_DEBUGGER__: <T>(a: T) => T;
-
 declare namespace NodeJS {
   interface Global {
     document: any;
-    window: {
-      __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: <T>(a: T) => T;
-    };
+    window: any;
     navigator: any;
     System: System;
     __DEV__: typeof __DEV__;

@@ -37,6 +37,15 @@ const webpackProdConfig: webpack.Configuration = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true,
+      },
+      compress: {
+        screw_ie8: true,
+      },
+      comments: false,
       sourceMap: true,
     }),
     new ExtractTextPlugin({
@@ -60,6 +69,14 @@ const webpackProdConfig: webpack.Configuration = {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
       },
     }),
     new webpack.optimize.AggressiveMergingPlugin(),

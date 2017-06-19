@@ -35,7 +35,7 @@ export default class Counter extends React.PureComponent<CounterProps, CounterSt
 
   static defaultProps: Partial<CounterProps> = defaultProps;
 
-  intervalID: NodeJS.Timer;
+  intervalID: number;
 
   constructor(args: CounterProps) {
     super(args);
@@ -69,7 +69,7 @@ export default class Counter extends React.PureComponent<CounterProps, CounterSt
       onStart = defaultOnStart,
     } = this.props;
 
-    this.intervalID = setInterval(() =>
+    this.intervalID = window.setInterval(() =>
       this.setState(
         ({ value }) => ({
           value: value + 1,

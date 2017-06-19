@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as DashboardPlugin from 'webpack-dashboard/plugin';
 import * as webpackMerge from 'webpack-merge';
 import * as pkg from './package.json';
 import webpackBaseConfig, {
@@ -51,6 +52,7 @@ const webpackDevConfig: webpack.Configuration = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     ...getHTMLPlugin(),
+    new DashboardPlugin(),
   ],
   module: {
     rules: [
@@ -87,6 +89,12 @@ const webpackDevConfig: webpack.Configuration = {
         pathRewrite: { '^/service': '' },
       },
     },
+  },
+  // Turn off performance hints during development because we don't do any
+  // splitting or minification in interest of speed. These warnings become
+  // cumbersome.
+  performance: {
+    hints: false,
   },
 };
 

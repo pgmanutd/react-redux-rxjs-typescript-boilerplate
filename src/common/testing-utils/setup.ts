@@ -1,6 +1,5 @@
-import './jsdom';
-
 import './globals';
+import './jsdom';
 
 import * as chai from 'chai';
 import * as chaiEnzyme from 'chai-enzyme';

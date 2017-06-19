@@ -9,5 +9,3 @@ global.System = {
 global.__DEV__ = true;
 global.__LANGUAGE__ = 'en';
 global.__FP_DEBUGGER__ = fp.identity;
-
-global.window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = fp.identity;

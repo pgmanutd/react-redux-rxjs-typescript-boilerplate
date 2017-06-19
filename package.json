@@ -52,6 +52,7 @@
     "check": "concurrently --prefix \"[{name}]\" --names \"LINT,CLEAN\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run lint\" \"npm run test\"",
     "predev": "npm run clean:dist",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.ts --progress --colors --debug",
+    "dev:dashboard": "webpack-dashboard npm run dev",
     "prebuild": "concurrently --prefix \"[{name}]\" --names \"LINT,CLEAN\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run lint\" \"npm run clean:dist\"",
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.ts --progress --colors --profile --bail",
     "version:patch": "npm version patch",
@@ -183,6 +184,7 @@
     "typescript": "^2.3.4",
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1",
+    "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.4.5",
     "webpack-merge": "^4.1.0"
   }
