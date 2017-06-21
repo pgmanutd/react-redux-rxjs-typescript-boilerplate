@@ -1,7 +1,10 @@
 import * as fp from 'lodash/fp';
 import { Observable } from 'rxjs';
 
-const getObservableValue = <T, FallbackValue>(input: Observable<T>, fallback: FallbackValue): (T | FallbackValue) => {
+const getObservableValue = <T, FallbackValue>(
+  input: Observable<T>,
+  fallback: FallbackValue,
+): (T | FallbackValue) => {
   let value: any;
 
   input.subscribe({

@@ -5,6 +5,7 @@ import * as React from 'react';
 
 import {
   computeObservable,
+  delayedObservable,
   Observable,
   observableFromPromise,
   observableOf,
@@ -13,30 +14,23 @@ import {
 import purify from './purify';
 import Rx, { ReactComponentT } from './Rx';
 
-// NOTE: Why <T extends {}> => https://basarat.gitbooks.io/typescript/docs/types/generics.html
-export const getBundle$ = <T extends {}>(promisifiedBundle: Promise<T>) => {
-  try {
-    return observableFromPromise<T>(promisifiedBundle);
-  } catch (e) {
-    clogy.error(`Can't load bundle`, e);
-  }
+export interface BundleComponentProps<T> {
+  children: ReactComponentT<T>;
+  LoadingComponent: React.ReactElement<T>;
+}
+export const BundleComponent: React.StatelessComponent<BundleComponentProps<{}>> = (props) => {
+  const { children, LoadingComponent } = props;
+  const Bundle = children as ReactComponentT<{}>;
 
-  return observableOf(null);
-};
-
-export const BundleComponent: ReactComponentT<{}> = (props) => {
-  const Bundle = props.children as ReactComponentT<{}>;
-
-  if (Bundle) {
+  if (fp.isFunction(Bundle)) {
     return <Bundle />;
   }
 
-  // NOTE: Should be null. Some problem with React Type definitions.
-  // https://github.com/facebook/react/issues/5355
-  return <noscript />;
+  return LoadingComponent;
 };
 BundleComponent.propTypes = {
   children: PropTypes.func,
+  LoadingComponent: PropTypes.element,
 };
 
 export const PurifiedBundleRxComponent = fp.flowRight(Rx, purify)(BundleComponent);
@@ -48,14 +42,38 @@ export const getModuleFromBundle$ = <T1, T2>(bundle$: Observable<T1>) =>
     ],
   );
 
+// NOTE: Why <T extends {}> => https://basarat.gitbooks.io/typescript/docs/types/generics.html
+export const getBundle$ = <T extends {}>(loader: Promise<T>) => {
+  try {
+    return observableFromPromise<T>(loader);
+  } catch (e) {
+    clogy.error(`Can't load bundle`, e);
+  }
+
+  return observableOf(null);
+};
+
 export type PromiseThunkT = <T>() => Promise<T>;
 export type BundleRXComponentT = () => JSX.Element;
-export type BundleRx$T = (getPromisifiedBundle: PromiseThunkT) => BundleRXComponentT;
-const BundleRx: BundleRx$T = (getPromisifiedBundle) => () =>
-  <PurifiedBundleRxComponent>
-    {
-      fp.flowRight(getModuleFromBundle$, getBundle$, getPromisifiedBundle)()
-    }
-  </PurifiedBundleRxComponent>;
+export interface BundleRxArgs<T = {}> {
+  loader: PromiseThunkT;
+  LoadingComponent?: React.ReactElement<T>;
+  delay?: number;
+}
+const BundleRx = ({
+  loader,
+  LoadingComponent = null,
+  delay = 0,
+}: BundleRxArgs): BundleRXComponentT => () => {
+  const getBundleFromLoader$ =  () => fp.flowRight(getModuleFromBundle$, getBundle$, loader)();
+
+  return (
+    <PurifiedBundleRxComponent LoadingComponent={LoadingComponent}>
+      {
+        delayedObservable(delay, getBundleFromLoader$)
+      }
+    </PurifiedBundleRxComponent>
+  );
+};
 
 export default BundleRx;

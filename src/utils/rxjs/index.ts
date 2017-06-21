@@ -10,6 +10,11 @@ export {
 from './computeObservable';
 
 export {
+  default as delayedObservable,
+}
+from './delayedObservable';
+
+export {
   default as getObservableValue,
 }
 from './getObservableValue';

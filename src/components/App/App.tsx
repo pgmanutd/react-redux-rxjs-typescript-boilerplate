@@ -18,7 +18,10 @@ const App: React.StatelessComponent<{}> = () => (
     >
       <Router>
         <Switch>
-          <Route path="/" component={Master} />
+          <Route
+            path="/"
+            component={Master}
+          />
         </Switch>
       </Router>
     </div>

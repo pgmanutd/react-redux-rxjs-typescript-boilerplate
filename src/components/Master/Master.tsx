@@ -6,9 +6,13 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { BundleRx } from '@webui/components/Common';
+import { BundleRx, Rx } from '@webui/components/Common';
+import Localize from '@webui/utils/Localize';
 
 import * as bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+
+const localize = Localize('components/Master/Master.tsx');
+const LocalizeRxComponent = Rx();
 
 const {
   dFlex,
@@ -22,8 +26,8 @@ const {
   container,
 } = bootstrap;
 
-const getPromisifiedHomeLayoutBundle = () => System.import<any>('@webui/layouts/Home');
-const getPromisifiedFourOFourLayoutBundle = () => System.import<any>('@webui/layouts/404');
+const homeLayoutLoader = () => System.import('@webui/layouts/Home');
+const fourOFourLayoutLoader = () => System.import('@webui/layouts/404');
 
 const Master: React.StatelessComponent<{}> = () => (
   <div
@@ -35,18 +39,48 @@ const Master: React.StatelessComponent<{}> = () => (
         className={navbarBrand}
         to="/"
       >
-        Website
+        <LocalizeRxComponent>
+          {localize('website', 'Website')}
+        </LocalizeRxComponent>
       </Link>
       <ul className={classnames(nav, navbarNav)}>
         <li className={classnames(navItem, active)}>
-          <Link to="/">Home</Link>
+          <Link to="/">
+            <LocalizeRxComponent>
+              {localize('home', 'Home')}
+            </LocalizeRxComponent>
+          </Link>
         </li>
       </ul>
     </header>
     <div className={container}>
       <Switch>
-        <Route exact path="/" component={BundleRx(getPromisifiedHomeLayoutBundle)} />
-        <Route component={BundleRx(getPromisifiedFourOFourLayoutBundle)}/>
+        <Route
+          exact path="/"
+          component={
+            BundleRx({
+              loader: homeLayoutLoader,
+              LoadingComponent: (
+                <LocalizeRxComponent>
+                  {
+                    localize(
+                      'homeDelayMessage',
+                      'Loading Home Layout. Wait for 5 sec. Also keep an eye on network tab of devtools.',
+                    )
+                  }
+                </LocalizeRxComponent>
+              ),
+              delay: 5000,
+            })
+          }
+        />
+        <Route
+          component={
+            BundleRx({
+              loader: fourOFourLayoutLoader,
+            })
+          }
+        />
       </Switch>
     </div>
   </div>

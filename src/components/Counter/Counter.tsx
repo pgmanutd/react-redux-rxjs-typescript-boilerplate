@@ -2,7 +2,7 @@ import * as fp from 'lodash/fp';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-import { NoOpT } from '@webui/components/Common';
+export type NoOpT = (() => void);
 
 export interface CounterProps {
   readonly min?: number;
