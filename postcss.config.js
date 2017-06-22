@@ -1,14 +1,21 @@
 'use strict';
 
 const ResolverFactory = require('enhanced-resolve/lib/ResolverFactory');
-const NodeJsInputFileSystem = require('enhanced-resolve/lib/NodeJsInputFileSystem');
-const CachedInputFileSystem = require('enhanced-resolve/lib/CachedInputFileSystem');
+const NodeJsInputFileSystem = require(
+  'enhanced-resolve/lib/NodeJsInputFileSystem'
+);
+const CachedInputFileSystem = require(
+  'enhanced-resolve/lib/CachedInputFileSystem'
+);
 
 const pkg = require('./package.json');
 const webpackBaseConfig = require('./webpack.config.base').default;
 
 const CACHED_DURATION = 60000;
-const fileSystem = new CachedInputFileSystem(new NodeJsInputFileSystem(), CACHED_DURATION);
+const fileSystem = new CachedInputFileSystem(
+  new NodeJsInputFileSystem(),
+  CACHED_DURATION
+);
 
 const {
   config: {

@@ -1,6 +1,6 @@
 export {
   default,
 }
-from './Localize';
+  from './Localize';
 
 export * from './Localize';

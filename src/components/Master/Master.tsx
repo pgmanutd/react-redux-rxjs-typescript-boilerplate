@@ -26,14 +26,15 @@ const {
   container,
 } = bootstrap;
 
-const homeLayoutLoader = () => System.import('@webui/layouts/Home');
-const fourOFourLayoutLoader = () => System.import('@webui/layouts/404');
+// TODO: Remove space after import once tslint v5.5 gets released
+const homeLayoutLoader = () => import (/* webpackChunkName: '[request]' */ '@webui/layouts/Home');
+const fourOFourLayoutLoader = () => import (/* webpackChunkName: '[request]' */ '@webui/layouts/404');
 
 const Master: React.StatelessComponent<{}> = () => (
   <div
-      data-testid="Master"
-      className={classnames(dFlex, flexColumn)}
-    >
+    data-testid="Master"
+    className={classnames(dFlex, flexColumn)}
+  >
     <header className={navbar}>
       <Link
         className={navbarBrand}

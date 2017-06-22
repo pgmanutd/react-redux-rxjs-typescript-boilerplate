@@ -80,6 +80,8 @@ const webpackProdConfig: webpack.Configuration = {
       },
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
+    // TODO: Ambient Declaration for ModuleConcatenationPlugin not present
+    new (webpack.optimize as any).ModuleConcatenationPlugin(),
     // TODO: Ambient Declaration for HashedModuleIdsPlugin not present
     new (webpack as any).HashedModuleIdsPlugin(),
     new OfflinePlugin({

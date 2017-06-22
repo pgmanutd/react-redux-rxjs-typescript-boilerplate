@@ -98,11 +98,11 @@ const webpackBaseConfig: webpack.Configuration = {
       `${pkg.name} - v${pkg.version} * ${pkg.homepage} * (c) ${new Date().getFullYear()} ${pkg.author.name} * licensed ${pkg.license}`,
     ),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
+      names: ['vendor', 'manifest'],
       minChunks: Infinity,
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: [MODULE_NAME],
+      names: [MODULE_NAME],
       children: true,
       async: true,
     }),

@@ -2,34 +2,34 @@ export {
   Observable,
   Subscription,
 }
-from 'rxjs';
+  from 'rxjs';
 
 export {
   default as computeObservable,
 }
-from './computeObservable';
+  from './computeObservable';
 
 export {
   default as delayedObservable,
 }
-from './delayedObservable';
+  from './delayedObservable';
 
 export {
   default as getObservableValue,
 }
-from './getObservableValue';
+  from './getObservableValue';
 
 export {
   default as isObservable,
 }
-from './isObservable';
+  from './isObservable';
 
 export {
   default as observableFromPromise,
 }
-from './observableFromPromise';
+  from './observableFromPromise';
 
 export {
   default as observableOf,
 }
-from './observableOf';
+  from './observableOf';

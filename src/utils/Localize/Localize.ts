@@ -39,7 +39,8 @@ export const getLocaleFile$: GetLocaleFile$T = (path: string) => {
   if (defaultLocale !== currentLocale) {
     try {
       return observableFromPromise<KeyValuePair>(
-        System.import<KeyValuePair>(`./${currentLocale}/${path}.i18n.json`),
+        // TODO: Remove space after import once tslint v5.5 gets released
+        import (/* webpackChunkName: 'i18n/[request]' */ `./${currentLocale}/${path}.i18n.json`),
       );
     } catch (e) {
       clogy.error(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
