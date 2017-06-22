@@ -33,8 +33,8 @@ const webpackDevConfig: webpack.Configuration = {
     ],
   },
   output: {
-    filename: '[name].js',
-    chunkFilename: '[id].chunk.js',
+    filename: `${DIRS.static}/js/[name]/[name].js`,
+    chunkFilename: `${DIRS.static}/js/chunks/[id].chunk.js`,
   },
   devtool: 'cheap-module-eval-source-map',
   plugins: [

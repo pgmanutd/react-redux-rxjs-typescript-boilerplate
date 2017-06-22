@@ -24,7 +24,8 @@
     "dirs": {
       "src": "src",
       "dist": "dist",
-      "lib": "lib"
+      "lib": "lib",
+      "static": "static"
     },
     "env": {
       "dev": "development",

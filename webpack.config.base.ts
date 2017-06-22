@@ -116,7 +116,7 @@ const webpackBaseConfig: webpack.Configuration = {
     }),
     new FaviconsWebpackPlugin({
       logo: path.resolve(__dirname, 'public/imgs/favicon.jpg'),
-      prefix: 'icons-[hash]/',
+      prefix: `${DIRS.static}/media/icons-[hash]/`,
       emitStats: false,
       statsFilename: 'iconstats-[hash].json',
       persistentCache: true,
@@ -161,7 +161,7 @@ const webpackBaseConfig: webpack.Configuration = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'fonts/[hash:8].[ext]',
+          name: `${DIRS.static}/media/fonts/[hash:8].[ext]`,
         },
       }],
     }, {
@@ -170,7 +170,7 @@ const webpackBaseConfig: webpack.Configuration = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'imgs/[hash:8].[ext]',
+          name: `${DIRS.static}/media/imgs/[hash:8].[ext]`,
         },
       }, {
         loader: 'img-loader',

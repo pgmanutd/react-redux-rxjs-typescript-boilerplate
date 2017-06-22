@@ -30,8 +30,8 @@ const webpackProdConfig: webpack.Configuration = {
     ],
   },
   output: {
-    filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[id].[chunkhash:8].chunk.js',
+    filename: `${DIRS.static}/js/[name]/[name].[chunkhash:8].js`,
+    chunkFilename: `${DIRS.static}/js/chunks/[id].[chunkhash:8].chunk.js`,
   },
   devtool: 'source-map',
   plugins: [
@@ -49,7 +49,7 @@ const webpackProdConfig: webpack.Configuration = {
       sourceMap: true,
     }),
     new ExtractTextPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: `${DIRS.static}/css/[name]/[name].[contenthash:8].css`,
       allChunks: true,
     }),
     new webpack.DefinePlugin({
