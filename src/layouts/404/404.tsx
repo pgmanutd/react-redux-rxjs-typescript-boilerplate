@@ -7,7 +7,7 @@ import Localize from '@webui/utils/Localize';
 
 import * as bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 
-const localize = Localize('layouts/404/404.tsx');
+const localize = Localize({ path: 'layouts/404', filename: '404.tsx' });
 const LocalizeRxComponent = Rx();
 
 const {

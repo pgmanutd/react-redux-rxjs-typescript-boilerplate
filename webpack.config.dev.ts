@@ -34,7 +34,7 @@ const webpackDevConfig: webpack.Configuration = {
   },
   output: {
     filename: `${DIRS.static}/js/[name]/[name].js`,
-    chunkFilename: `${DIRS.static}/js/chunks/[id].chunk.js`,
+    chunkFilename: `${DIRS.static}/js/chunks/[name].chunk.js`,
   },
   devtool: 'cheap-module-eval-source-map',
   plugins: [
@@ -76,6 +76,7 @@ const webpackDevConfig: webpack.Configuration = {
   devServer: {
     hot: true,
     open: true,
+    openPage: '',
     contentBase: path.resolve(__dirname, DIRS.dist),
     publicPath: '/',
     historyApiFallback: true,

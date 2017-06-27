@@ -11,7 +11,7 @@ import Localize from '@webui/utils/Localize';
 
 import * as bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
 
-const localize = Localize('components/Master/Master.tsx');
+const localize = Localize({ path: 'components/Master', filename: 'Master.tsx' });
 const LocalizeRxComponent = Rx();
 
 const {
@@ -27,8 +27,8 @@ const {
 } = bootstrap;
 
 // TODO: Remove space after import once tslint v5.5 gets released
-const homeLayoutLoader = () => import (/* webpackChunkName: '[request]' */ '@webui/layouts/Home');
-const fourOFourLayoutLoader = () => import (/* webpackChunkName: '[request]' */ '@webui/layouts/404');
+const homeLayoutLoader = () => import (/* webpackChunkName: "layouts/Home" */ '@webui/layouts/Home');
+const fourOFourLayoutLoader = () => import (/* webpackChunkName: "layouts/404" */ '@webui/layouts/404');
 
 const Master: React.StatelessComponent<{}> = () => (
   <div

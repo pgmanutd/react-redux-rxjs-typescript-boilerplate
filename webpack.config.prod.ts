@@ -31,7 +31,7 @@ const webpackProdConfig: webpack.Configuration = {
   },
   output: {
     filename: `${DIRS.static}/js/[name]/[name].[chunkhash:8].js`,
-    chunkFilename: `${DIRS.static}/js/chunks/[id].[chunkhash:8].chunk.js`,
+    chunkFilename: `${DIRS.static}/js/chunks/[name].[chunkhash:8].chunk.js`,
   },
   devtool: 'source-map',
   plugins: [
@@ -45,7 +45,6 @@ const webpackProdConfig: webpack.Configuration = {
       compress: {
         screw_ie8: true,
       },
-      comments: false,
       sourceMap: true,
     }),
     new ExtractTextPlugin({
@@ -80,8 +79,7 @@ const webpackProdConfig: webpack.Configuration = {
       },
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
-    // TODO: Ambient Declaration for ModuleConcatenationPlugin not present
-    new (webpack.optimize as any).ModuleConcatenationPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // TODO: Ambient Declaration for HashedModuleIdsPlugin not present
     new (webpack as any).HashedModuleIdsPlugin(),
     new OfflinePlugin({
