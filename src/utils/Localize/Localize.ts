@@ -36,8 +36,11 @@ export const getLocaleFile$ = ({ path, filename }: { path: string, filename: str
   if (defaultLocale !== currentLocale) {
     try {
       return observableFromPromise<KeyValuePair>(
-        // TODO: Remove space after import once tslint v5.5 gets released
-        import (`@webui/layouts/404/locales/es/404.tsx.i18n.json`),
+        // TODO: 1. Remove space after import once tslint v5.5 gets released
+        //       2. Add es6 template string once this is fixed:
+        //          https://github.com/Microsoft/TypeScript/issues/16763
+        //       3. Also try to use [request] if it works in next webpack version
+        import (/* webpackChunkName: "i18n/" */ '@webui/' + path + '/locales/' + currentLocale + '/' + filename + '.i18n.json'),
       );
     } catch (e) {
       clogy.error(`Can't load locale i.e. ${currentLocale} for path: ${path}, filename: ${filename}`, e);
