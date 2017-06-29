@@ -1,4 +1,4 @@
 export {
   default,
 }
-from './404';
+  from './404';

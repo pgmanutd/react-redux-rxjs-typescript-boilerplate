@@ -1,22 +1,22 @@
 export {
   default as BundleRx,
 }
-from './BundleRx';
+  from './BundleRx';
 export * from './BundleRx';
 
 export {
   default as purify,
 }
-from './purify';
+  from './purify';
 
 export {
   default as rename,
 }
-from './rename';
+  from './rename';
 
 export {
   default as Rx,
 }
-from './Rx';
+  from './Rx';
 
 export * from './Rx';

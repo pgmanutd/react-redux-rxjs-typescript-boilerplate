@@ -2,4 +2,4 @@ export {
   Action,
   Reducer,
 }
-from 'redux';
+  from 'redux';

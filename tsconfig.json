@@ -12,7 +12,6 @@
     "sourceMap": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "removeComments": true,
     "jsx": "react",
     "suppressImplicitAnyIndexErrors": true,
     "noFallthroughCasesInSwitch": true,

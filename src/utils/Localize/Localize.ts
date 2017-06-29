@@ -18,31 +18,32 @@ const localeSettings: LocaleSettings = {
   currentLocale: __LANGUAGE__,
 };
 
-type checkIfLocaleIsStringT = (locale: string) => never | void;
-export const checkIfLocaleIsString: checkIfLocaleIsStringT = (locale) => {
+export const checkIfLocaleIsString = (locale: string) => {
   if (fp.negate(fp.isString)(locale)) {
     throw new TypeError(`${locale} should be string`);
   }
 };
 
-type ConfigT = ({ locale }: { locale: string }) => void;
-export const config: ConfigT = ({ locale }) => {
+export const config = ({ locale }: { locale: string }) => {
   checkIfLocaleIsString(locale);
 
   localeSettings.currentLocale = locale;
 };
 
-type GetLocaleFile$T = (path: string) => Observable<KeyValuePair>;
-export const getLocaleFile$: GetLocaleFile$T = (path: string) => {
+export const getLocaleFile$ = ({ path, filename }: { path: string, filename: string }) => {
   const { defaultLocale, currentLocale }: LocaleSettings = localeSettings;
 
   if (defaultLocale !== currentLocale) {
     try {
       return observableFromPromise<KeyValuePair>(
-        System.import<KeyValuePair>(`./${currentLocale}/${path}.i18n.json`),
+        // TODO: 1. Remove space after import once tslint v5.5 gets released
+        //       2. Add es6 template string once this is fixed:
+        //          https://github.com/Microsoft/TypeScript/issues/16763
+        //       3. Also try to use [request] if it works in next webpack version
+        import (/* webpackChunkName: "i18n/" */ '@webui/' + path + '/locales/' + currentLocale + '/' + filename + '.i18n.json'),
       );
     } catch (e) {
-      clogy.error(`Can't load locale i.e. ${currentLocale} for ${path}`, e);
+      clogy.error(`Can't load locale i.e. ${currentLocale} for path: ${path}, filename: ${filename}`, e);
     }
   }
 
@@ -60,9 +61,8 @@ export const getValueFromLocaleFile: GetValueFromLocaleFileT = (
   fallback: string,
 ) => fp.pathOr(fallback, key, localeFile);
 
-type LocalizeT = (path: string) => (key: string, text: string) => Observable<string>;
-const Localize: LocalizeT = (path: string) => {
-  const localeFile$: Observable<KeyValuePair> = getLocaleFile$(path);
+const Localize = ({ path, filename }: { path: string, filename: string }) => {
+  const localeFile$: Observable<KeyValuePair> = getLocaleFile$({ path, filename });
 
   return (key: string, text: string) =>
     computeObservable<KeyValuePair | string, string>(
