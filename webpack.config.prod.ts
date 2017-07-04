@@ -116,6 +116,19 @@ const webpackProdConfig: webpack.Configuration = {
   module: {
     rules: [
       getTSConfig(),
+      // NOTE: Special css config
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+            },
+          ],
+        }),
+        include: /node_modules/,
+      },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -125,6 +138,7 @@ const webpackProdConfig: webpack.Configuration = {
             minimize: true,
           }),
         }),
+        exclude: /node_modules/,
       },
     ],
   },

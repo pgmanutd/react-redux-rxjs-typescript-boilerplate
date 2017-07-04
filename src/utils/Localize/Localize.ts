@@ -50,15 +50,15 @@ export const getLocaleFile$ = ({ path, filename }: { path: string, filename: str
   return observableOf({});
 };
 
-type GetValueFromLocaleFileT = <T, K extends keyof T, U>(
+type GetValueFromLocaleFileT<T, K extends keyof T, U> = (
   localeFile: T,
   key: K,
   fallback: U,
 ) => T[K] | U;
-export const getValueFromLocaleFile: GetValueFromLocaleFileT = (
-  localeFile: KeyValuePair,
-  key: keyof KeyValuePair,
-  fallback: string,
+export const getValueFromLocaleFile: GetValueFromLocaleFileT<KeyValuePair, keyof KeyValuePair, string> = (
+  localeFile,
+  key,
+  fallback,
 ) => fp.pathOr(fallback, key, localeFile);
 
 const Localize = ({ path, filename }: { path: string, filename: string }) => {

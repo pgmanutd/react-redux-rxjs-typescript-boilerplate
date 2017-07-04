@@ -5,6 +5,7 @@ import 'clogy';
 import 'lodash/fp';
 import 'prop-types';
 import 'react';
+import 'react-bootstrap';
 import 'react-dom';
 import 'react-redux';
 import 'react-router-dom';

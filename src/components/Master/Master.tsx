@@ -1,4 +1,3 @@
-import * as classnames from 'classnames';
 import * as React from 'react';
 import {
   Link,
@@ -9,22 +8,8 @@ import {
 import { BundleRx, Rx } from '@webui/components/Common';
 import Localize from '@webui/utils/Localize';
 
-import * as bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
-
 const localize = Localize({ path: 'components/Master', filename: 'Master.tsx' });
 const LocalizeRxComponent = Rx();
-
-const {
-  dFlex,
-  flexColumn,
-  nav,
-  navbar,
-  navbarBrand,
-  navbarNav,
-  navItem,
-  active,
-  container,
-} = bootstrap;
 
 // TODO: Remove space after import once tslint v5.5 gets released
 const homeLayoutLoader = () => import (/* webpackChunkName: "layouts/Home" */ '@webui/layouts/Home');
@@ -33,19 +18,19 @@ const fourOFourLayoutLoader = () => import (/* webpackChunkName: "layouts/404" *
 const Master: React.StatelessComponent<{}> = () => (
   <div
     data-testid="Master"
-    className={classnames(dFlex, flexColumn)}
+    className="d-flex flex-column"
   >
-    <header className={navbar}>
+    <header className="navbar">
       <Link
-        className={navbarBrand}
+        className="navbar-brand"
         to="/"
       >
         <LocalizeRxComponent>
           {localize('website', 'Website')}
         </LocalizeRxComponent>
       </Link>
-      <ul className={classnames(nav, navbarNav)}>
-        <li className={classnames(navItem, active)}>
+      <ul className="nav navbar-nav">
+        <li className="nav-item active">
           <Link to="/">
             <LocalizeRxComponent>
               {localize('home', 'Home')}
@@ -54,7 +39,7 @@ const Master: React.StatelessComponent<{}> = () => (
         </li>
       </ul>
     </header>
-    <div className={container}>
+    <div className="container">
       <Switch>
         <Route
           exact path="/"

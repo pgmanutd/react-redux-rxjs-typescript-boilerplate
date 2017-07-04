@@ -59,6 +59,25 @@ const webpackDevConfig: webpack.Configuration = {
       getTSConfig([{
         loader: 'react-hot-loader/webpack',
       }]),
+      // NOTE: Special css config
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        include: /node_modules/,
+      },
       {
         test: /\.css$/,
         use: [
@@ -70,6 +89,7 @@ const webpackDevConfig: webpack.Configuration = {
             sourceMap: true,
           }),
         ],
+        exclude: /node_modules/,
       },
     ],
   },

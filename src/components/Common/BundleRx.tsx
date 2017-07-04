@@ -53,27 +53,28 @@ export const getBundle$ = <T extends {}>(loader: Promise<T>) => {
   return observableOf(null);
 };
 
-export type PromiseThunkT = <T>() => Promise<T>;
+export type PromiseThunkT<T> = () => Promise<T>;
 export type BundleRXComponentT = () => JSX.Element;
-export interface BundleRxArgs<T = {}> {
-  loader: PromiseThunkT;
-  LoadingComponent?: React.ReactElement<T>;
+export interface BundleRxArgs<T1, T2> {
+  loader: PromiseThunkT<T1>;
+  LoadingComponent?: React.ReactElement<T2>;
   delay?: number;
 }
-const BundleRx = ({
+const BundleRx = <T1, T2>({
   loader,
   LoadingComponent = null,
   delay = 0,
-}: BundleRxArgs): BundleRXComponentT => () => {
-  const getBundleFromLoader$ =  () => fp.flowRight(getModuleFromBundle$, getBundle$, loader)();
+}: BundleRxArgs<T1, T2>): BundleRXComponentT =>
+  () => {
+    const getBundleFromLoader$ = () => fp.flowRight(getModuleFromBundle$, getBundle$, loader)();
 
-  return (
-    <PurifiedBundleRxComponent LoadingComponent={LoadingComponent}>
-      {
-        delayedObservable(delay, getBundleFromLoader$)
-      }
-    </PurifiedBundleRxComponent>
-  );
-};
+    return (
+      <PurifiedBundleRxComponent LoadingComponent={LoadingComponent}>
+        {
+          delayedObservable(delay, getBundleFromLoader$)
+        }
+      </PurifiedBundleRxComponent>
+    );
+  };
 
 export default BundleRx;

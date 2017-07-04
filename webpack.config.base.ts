@@ -172,8 +172,6 @@ const webpackBaseConfig: webpack.Configuration = {
           limit: 10000,
           name: `${DIRS.static}/media/imgs/[hash:8].[ext]`,
         },
-      }, {
-        loader: 'img-loader',
       }],
     }],
   },
