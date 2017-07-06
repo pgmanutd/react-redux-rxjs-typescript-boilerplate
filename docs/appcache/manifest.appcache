@@ -1,0 +1,12 @@
+CACHE MANIFEST
+#ver:7/9/2017, 12:35:31 AM
+#plugin:4.8.1
+
+CACHE:
+
+
+NETWORK:
+*
+
+FALLBACK:
+/ /offline-page.html
