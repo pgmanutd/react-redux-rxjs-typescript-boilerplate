@@ -1,3 +1,9 @@
+## [DEPRECATED]
+
+I am deprecating this repo in favor of a new boilerplate in futue.
+
+***
+
 # React Redux RxJS Typescript Boilerplate with React Hot Loader
 
 ## Getting started
